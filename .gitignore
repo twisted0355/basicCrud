@@ -1,0 +1,11 @@
+### Example user template
+
+# IntelliJ project files PHPStorm
+.idea
+*.iml
+
+# configuration
+config.php
+
+# ignore bak from Workbench
+datas/basiccrud.mwb.bak
