@@ -3,10 +3,11 @@
 require_once "../model/articleModel.php";
 require_once "../model/rubriqueModel.php";
 
-// for menu
+// for menu from rubrique's table
 $mainMenu = recupCategMenu($mysqli);
 
-// ON EST ICI
+
+
 
 /*
  * article detail
@@ -27,4 +28,7 @@ if(isset($_GET['idarticle'])&&ctype_digit($_GET['idarticle'])){
  */
 }else{
 
+
+    // include view
+    include("../view/publicHomepage.php");
 }
