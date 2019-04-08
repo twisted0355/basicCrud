@@ -27,7 +27,8 @@ if(isset($_GET['idarticle'])&&ctype_digit($_GET['idarticle'])){
  * Homepage
  */
 }else{
-
+    // articles récuparation
+    $articles = recupArticleHomepage($mysqli);
 
     // include view
     include("../view/publicHomepage.php");
