@@ -1,3 +1,20 @@
+<?php
+// pas d'article
+
+/* méthode if else
+if($article===false){
+    $titre = "Erreur 404";
+}else{
+    $titre = $article['thetitle'];
+}
+*/
+
+
+// condition ternaire
+
+$titre = (!$article)? "Erreur 404" : $article['thetitle'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +24,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>basicCrud | </title>
+    <title>basicCrud | <?=$titre?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -23,7 +40,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12 text-center">
-            <h1 class="mt-5">basicCrud |</h1>
+            <h1 class="mt-5">basicCrud | <?=$titre?></h1>
             <p class="lead">Détail de l'article</p>
         </div>
     </div>
