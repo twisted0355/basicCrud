@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>basicCrud Homepage</title>
+    <title>basicCrud | </title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -23,37 +23,36 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12 text-center">
-            <h1 class="mt-5">basicCrud Homepage</h1>
-            <p class="lead">Liste des articles de notre site</p>
+            <h1 class="mt-5">basicCrud |</h1>
+            <p class="lead">Détail de l'article</p>
         </div>
     </div>
 <!-- Articles -->
     <?php
     // pas d'article
-    if($articles===false){
+    if($article===false){
         ?>
         <div class="row">
             <div class="col-lg-12 text-center">
                 <hr>
-                <h2>Pas encore d'articles</h2>
-                <h3>Veuillez revenir plus tard</h3>
+                <h2>Erreur 404</h2>
+                <h3>Cet article n'existe plus</h3>
                 <hr>
             </div>
         </div>
     <?php
     }else {
-        foreach ($articles AS $itemArticle) {
             // pas de rubriques
-            if(is_null($itemArticle['idrubrique'])){
+            if(is_null($article['idrubrique'])){
                 $idrubrique="";
             }else {
-     $idrubrique = explode(',', $itemArticle['idrubrique']);
-     $theintitule = explode('|@|',$itemArticle['theintitule']);
+     $idrubrique = explode(',', $article['idrubrique']);
+     $theintitule = explode('|@|',$article['theintitule']);
             }
             ?>
             <div class="row">
                 <div class="col-lg-12 text-left">
-                    <h2><?= $itemArticle['thetitle'] ?></h2>
+                    <h2><?= $article['thetitle'] ?></h2>
                     <h4>Catégorie : <small><?php
              if(empty($idrubrique)){
                  ?>
@@ -67,17 +66,14 @@
                  }
              }
                             ?></small></h4>
-                    <p><?php
-    $position_last_space = strrpos($itemArticle['thetext'],' ');
-    echo substr($itemArticle['thetext'],0,$position_last_space);
-      ?> ... <a href="?idarticle=<?= $itemArticle['idarticle'] ?>">Lire la suite</a></p>
-                    <p><?= $itemArticle['thedate'] ?></p>
-                    <p>Auteur: <?= $itemArticle['thename'] ?></p>
+                    <p><?= nl2br($article['thetext'])?></p>
+                    <p><?= $article['thedate'] ?></p>
+                    <p>Auteur: <?= $article['thename'] ?></p>
                 </div>
             </div>
             <hr>
             <?php
-        }
+
     }
     ?>
 </div>
