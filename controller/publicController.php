@@ -17,7 +17,9 @@ if(isset($_GET['idarticle'])&&ctype_digit($_GET['idarticle'])){
 
 
 /*
+ *
  * rubrique detail
+ *
  */
 }elseif(isset($_GET['idrubrique'])&&ctype_digit($_GET['idrubrique'])){
 
@@ -31,5 +33,5 @@ if(isset($_GET['idarticle'])&&ctype_digit($_GET['idarticle'])){
     $articles = recupArticleHomepage($mysqli);
 
     // include view
-    include("../view/publicHomepage.php");
+    include("../view/publicHomepageView.php");
 }
