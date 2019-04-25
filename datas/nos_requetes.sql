@@ -51,3 +51,6 @@ SELECT a.thetitle, a.thetext, a.thedate,
 	WHERE a.thevisibility=1 AND a.idarticle=1
     GROUP BY a.idarticle
 ;
+
+# affichage d'une catégorie complète grace à son id
+SELECT * FROM rubrique WHERE idrubrique=1;
