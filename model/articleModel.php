@@ -54,3 +54,11 @@ function recupOneArticle(mysqli $db, int $id){
         return false;
     }
 }
+
+/*
+ * Récupération des articles se trouvant dans une rubrique
+ */
+function recupArticleRub(mysqli $db, int $idRub){
+    $idRub = (int) $idRub;
+    $sql="";
+}

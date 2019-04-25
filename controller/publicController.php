@@ -35,9 +35,15 @@ if(isset($_GET['idarticle'])&&ctype_digit($_GET['idarticle'])){
     if($detailRubrique===false){
         // include view error404
         include("../view/error404.php");
+    }else{
+
+        // recupération des articles se trouvant dans cette rubrique
+
+        $articlesRub = "";
+
     }
 
-    // include view
+
 
 
 /*
