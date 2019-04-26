@@ -2,6 +2,7 @@
 // import dependencies
 require_once "../model/articleModel.php";
 require_once "../model/rubriqueModel.php";
+require_once "../model/usersModel.php";
 
 // for menu from rubrique's table
 $mainMenu = recupCategMenu($mysqli);
@@ -46,8 +47,25 @@ if(isset($_GET['idarticle'])&&ctype_digit($_GET['idarticle'])){
 
     }
 
+    /*
+     *
+     * Connexion
+     *
+     */
+}elseif(isset($_GET['connect'])){
 
+    // formulaire envoyé
+    if(!empty($_POST)) {
 
+        $thelogin = htmlspecialchars(strip_tags(trim($_POST['thelogin'])),ENT_QUOTES);
+        $thepwd = htmlspecialchars(strip_tags(trim($_POST['thepwd'])),ENT_QUOTES);
+
+        $connect = ConnectUser($mysqli,$thelogin,$thepwd);
+
+    }
+
+    // include view
+    include "../view/publicConnectView.php";
 
 /*
  * Homepage

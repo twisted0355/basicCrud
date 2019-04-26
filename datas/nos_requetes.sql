@@ -149,3 +149,12 @@ SELECT a.idarticle, a.thetitle,LEFT(a.thetext,300) AS thetext, a.thedate,
     GROUP BY a.idarticle
     ORDER BY a.thedate DESC
 ;
+
+# pour se connecter
+
+SELECT users.idusers, users.thename, users.themail,
+	perm.thename AS permname, perm.theperm
+	FROM users
+    INNER JOIN perm
+		ON perm.idperm = users.perm_idperm
+    WHERE users.thelogin='Admin' AND users.thepwd='C1C224B03CD9BC7B6A86D77F5DACE40191766C485CD55DC48CAF9AC873335D6F';
