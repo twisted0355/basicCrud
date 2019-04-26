@@ -39,7 +39,10 @@ if(isset($_GET['idarticle'])&&ctype_digit($_GET['idarticle'])){
 
         // recupération des articles se trouvant dans cette rubrique
 
-        $articlesRub = "";
+        $articlesRub = recupArticleRub($mysqli,$idrubrique);
+
+        // include view publicRubriqueView
+        include("../view/publicRubriqueView.php");
 
     }
 

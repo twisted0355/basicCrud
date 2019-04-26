@@ -108,7 +108,7 @@ SELECT a.idarticle, a.thetitle,LEFT(a.thetext,300) AS thetext, a.thedate,
 						ON has.rubrique_idrubrique = rub.idrubrique
 					INNER JOIN article art 
 						ON art.idarticle = has.article_idarticle
-					WHERE has.rubrique_idrubrique=5
+					WHERE has.rubrique_idrubrique=3
                     ORDER BY rub.theintitule ASC)
         AND h.rubrique_idrubrique IN 
 			(SELECT ha.rubrique_idrubrique FROM article_has_rubrique ha WHERE ha.article_idarticle IN 
@@ -117,7 +117,7 @@ SELECT a.idarticle, a.thetitle,LEFT(a.thetext,300) AS thetext, a.thedate,
 						ON has.rubrique_idrubrique = rub.idrubrique
 					INNER JOIN article art 
 						ON art.idarticle = has.article_idarticle
-					WHERE has.rubrique_idrubrique=5
+					WHERE has.rubrique_idrubrique=3
                     ORDER BY rub.theintitule ASC
 				)
             )
@@ -144,7 +144,7 @@ SELECT a.idarticle, a.thetitle,LEFT(a.thetext,300) AS thetext, a.thedate,
 						ON has.rubrique_idrubrique = rub.idrubrique
 					INNER JOIN article art 
 						ON art.idarticle = has.article_idarticle
-					WHERE has.rubrique_idrubrique=5
+					WHERE has.rubrique_idrubrique=3
                     ORDER BY rub.theintitule ASC)
     GROUP BY a.idarticle
     ORDER BY a.thedate DESC
