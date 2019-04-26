@@ -12,11 +12,8 @@
                 </li>
                 <?php
                 foreach ($mainMenu AS $itemMenu) {
-                    ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="?idrubrique=<?=$itemMenu['idrubrique']?>"><?=$itemMenu['theintitule']?></a>
-                    </li>
-                    <?php
+                    ?><li class="nav-item"><a class="nav-link" href="?idrubrique=<?=$itemMenu['idrubrique']?>"><?=$itemMenu['theintitule']?></a>
+                    </li><?php
                 }
                 ?>
                 <li class="nav-item">
