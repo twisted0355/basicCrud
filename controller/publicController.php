@@ -37,7 +37,7 @@ if(isset($_GET['idarticle'])&&ctype_digit($_GET['idarticle'])){
         include("../view/error404.php");
     }else{
 
-        // recupération des articles se trouvant dans cette rubrique
+        // recupération des articles se trouvant dans cette rubrique (ici avec la difficulté de prendre en une seule requête les rubriques de chaques articles). La solution la plus simple aurait été de ne pas afficher les rubriques pour chaque article dans la page rubrique. La deuxième solution plus simple était de faire une succession de plusieurs SELECT dans une boucle
 
         $articlesRub = recupArticleRub($mysqli,$idrubrique);
 

@@ -30,19 +30,19 @@
 <!-- Articles -->
     <?php
     // pas d'article
-    if($articles===false){
+    if($articlesRub===false){
         ?>
         <div class="row">
             <div class="col-lg-12 text-center">
                 <hr>
-                <h2>Pas encore d'articles</h2>
+                <h2>Pas encore d'articles dans cette rubrique</h2>
                 <h3>Veuillez revenir plus tard</h3>
                 <hr>
             </div>
         </div>
     <?php
     }else {
-        foreach ($articles AS $itemArticle) {
+        foreach ($articlesRub AS $itemArticle) {
             // pas de rubriques
             if(is_null($itemArticle['idrubrique'])){
                 $idrubrique="";
