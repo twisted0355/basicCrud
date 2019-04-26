@@ -56,6 +56,40 @@ SELECT a.thetitle, a.thetext, a.thedate,
 SELECT * FROM rubrique WHERE idrubrique=1;
 
 
+
+
+#prepa grande requête
+SELECT art.idarticle FROM rubrique rub
+					INNER JOIN article_has_rubrique has 
+						ON has.rubrique_idrubrique = rub.idrubrique
+					INNER JOIN article art 
+						ON art.idarticle = has.article_idarticle
+					WHERE has.rubrique_idrubrique=3 
+                    ORDER BY rub.theintitule ASC;
+                    
+SELECT ha.rubrique_idrubrique FROM article_has_rubrique ha
+ WHERE ha.article_idarticle IN (2,4);      
+
+
+SELECT a.idarticle, a.thetitle,LEFT(a.thetext,300) AS thetext, a.thedate,
+	   u.thename,
+       GROUP_CONCAT(r.idrubrique ORDER BY r.theintitule) AS idrubrique, 
+       GROUP_CONCAT(r.theintitule ORDER BY r.theintitule SEPARATOR '|@|') AS theintitule
+	FROM article a
+    INNER JOIN users u
+		ON u.idusers = a.users_idusers
+    INNER JOIN article_has_rubrique h
+		ON h.article_idarticle = a.idarticle
+    INNER JOIN rubrique r
+		ON h.rubrique_idrubrique = r.idrubrique
+	WHERE a.thevisibility=1
+		AND a.idarticle IN (2,4)
+        AND h.rubrique_idrubrique IN (2,3,5)  
+        GROUP BY a.idarticle
+    ORDER BY a.thedate DESC;    
+    
+    
+
 # les articles présents dans une rubrique par date descendante, avec l'auteur, lorsqu'ils sont visibles
 SELECT a.idarticle, a.thetitle,LEFT(a.thetext,300) AS thetext, a.thedate,
 	   u.thename,
@@ -64,29 +98,30 @@ SELECT a.idarticle, a.thetitle,LEFT(a.thetext,300) AS thetext, a.thedate,
 	FROM article a
     INNER JOIN users u
 		ON u.idusers = a.users_idusers
-    LEFT JOIN article_has_rubrique h
+    INNER JOIN article_has_rubrique h
 		ON h.article_idarticle = a.idarticle
-    LEFT JOIN rubrique r
+    INNER JOIN rubrique r
 		ON h.rubrique_idrubrique = r.idrubrique
 	WHERE a.thevisibility=1
+		AND a.idarticle IN (SELECT art.idarticle FROM rubrique rub
+					INNER JOIN article_has_rubrique has 
+						ON has.rubrique_idrubrique = rub.idrubrique
+					INNER JOIN article art 
+						ON art.idarticle = has.article_idarticle
+					WHERE has.rubrique_idrubrique=4
+                    ORDER BY rub.theintitule ASC)
         AND h.rubrique_idrubrique IN 
-			(SELECT ha.rubrique_idrubrique FROM article_has_rubrique ha WHERE ha.article_idarticle = 
-				(SELECT a.idarticle FROM rubrique r
-					INNER JOIN article_has_rubrique h 
-						ON h.rubrique_idrubrique = r.idrubrique
-					INNER JOIN article a 
-						ON a.idarticle = h.article_idarticle
-					WHERE h.rubrique_idrubrique=5 
-                    ORDER BY r.theintitule ASC)
+			(SELECT ha.rubrique_idrubrique FROM article_has_rubrique ha WHERE ha.article_idarticle IN 
+				(SELECT art.idarticle FROM rubrique rub
+					INNER JOIN article_has_rubrique has 
+						ON has.rubrique_idrubrique = rub.idrubrique
+					INNER JOIN article art 
+						ON art.idarticle = has.article_idarticle
+					WHERE has.rubrique_idrubrique=4
+                    ORDER BY rub.theintitule ASC
+				)
             )
     GROUP BY a.idarticle
     ORDER BY a.thedate DESC
 ;
 
-
-SELECT a.idarticle FROM rubrique r
-INNER JOIN article_has_rubrique h 
-	ON h.rubrique_idrubrique = r.idrubrique
-INNER JOIN article a 
-	ON a.idarticle = h.article_idarticle
- WHERE h.rubrique_idrubrique=5 ORDER BY r.theintitule ASC;
