@@ -60,7 +60,7 @@
                         echo "Est publié";
                         }else{
                         echo "est en attente de publication";
-                        }?></h3>
+                        }?> | <img src="img/update.png" alt="Modifier" title="Modifier"/> </h3>
                     <h4>Catégorie : <small><?php
                             if(empty($idrubrique)){
                                 ?>

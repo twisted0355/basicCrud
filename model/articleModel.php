@@ -134,3 +134,22 @@ function recupArticleRedac(mysqli $db, int $idusers){
     }
 
 }
+
+/*
+ * creation d'un article
+ *
+ * ICI ICI ICI
+ *
+ *
+ */
+
+function createArticleRedac(mysqli $db, int $id, string $thetitle, string $text, string $date, array $rubrique){
+    $id = (int) $id;
+    $thetitle = htmlspecialchars(strip_tags(trim($thetitle)),ENT_QUOTES);
+    $text = htmlspecialchars(strip_tags(trim($text)),ENT_QUOTES);
+    $date = date("Y-m-d H:i:s",time());
+    $sql = "INSERT INTO article (thetitle,thetext,thedate,users_idusers) VALUES ('$thetitle','$text','$date',$id)";
+
+    $insert = mysqli_query($db,$sql) or die(mysqli_error($db));
+
+}
