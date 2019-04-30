@@ -1,5 +1,11 @@
 <?php
 
+/*
+ *
+ * public function
+ *
+ */
+
 // recuparation all articles for homepage
 
 function recupArticleHomepage(mysqli $db){
@@ -93,3 +99,38 @@ function recupArticleRub(mysqli $db, int $idRub){
 
 }
 
+
+
+/*
+ *
+ * Rédacteur function
+ *
+ */
+
+// recuparation all articles for homepage
+
+function recupArticleRedac(mysqli $db, int $idusers){
+
+    $idusers = (int)$idusers;
+
+    $sql="SELECT a.idarticle, a.thetitle,LEFT(a.thetext,350) AS thetext, a.thedate, a.thevisibility,
+       GROUP_CONCAT(r.idrubrique ORDER BY r.theintitule) AS idrubrique, 
+       GROUP_CONCAT(r.theintitule ORDER BY r.theintitule SEPARATOR '|@|') AS theintitule
+	FROM article a
+    LEFT JOIN article_has_rubrique h
+		ON h.article_idarticle = a.idarticle
+    LEFT JOIN rubrique r
+		ON h.rubrique_idrubrique = r.idrubrique
+	WHERE a.users_idusers = $idusers
+    GROUP BY a.idarticle
+    ORDER BY a.thedate DESC
+;";
+    $recup = mysqli_query($db,$sql);
+
+    if(mysqli_num_rows($recup)){
+        return mysqli_fetch_all($recup, MYSQLI_ASSOC);
+    }else{
+        return false;
+    }
+
+}
