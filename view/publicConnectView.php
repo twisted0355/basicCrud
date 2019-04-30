@@ -30,6 +30,9 @@ include "publicMainMenuView.php";
 
     <div class="row">
         <div class="col-lg-12 text-center">
+            <h4 class="btn-danger"><?php
+                if(isset($error)) echo $error;
+                ?></h4>
             <form action="" method="post" name="connexion">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Votre login</label>

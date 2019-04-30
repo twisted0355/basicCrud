@@ -62,6 +62,9 @@ if(isset($_GET['idarticle'])&&ctype_digit($_GET['idarticle'])){
 
         $connect = ConnectUser($mysqli,$thelogin,$thepwd);
 
+        if(!$connect){
+            $error = "Login ou mot de passe incorrecte";
+        }
     }
 
     // include view
