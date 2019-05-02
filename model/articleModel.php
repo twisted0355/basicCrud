@@ -184,3 +184,31 @@ function createArticleRedac(mysqli $db, int $id, string $thetitle, string $text,
     }
     return true;
 }
+
+// recuparation one article by idarticle and idusers for redacteur
+
+function recupOneArticleByUsers(mysqli $db, int $idarticle, int $iduser){
+    $idarticle = (int) $idarticle;
+    $iduser = (int) $iduser;
+    $sql="SELECT a.thetitle, a.thetext, a.thedate,
+	   u.thename,
+       GROUP_CONCAT(r.idrubrique ORDER BY r.theintitule) AS idrubrique, 
+       GROUP_CONCAT(r.theintitule ORDER BY r.theintitule SEPARATOR '|@|') AS theintitule
+	FROM article a
+    INNER JOIN users u
+		ON u.idusers = a.users_idusers
+    LEFT JOIN article_has_rubrique h
+		ON h.article_idarticle = a.idarticle
+    LEFT JOIN rubrique r
+		ON h.rubrique_idrubrique = r.idrubrique
+	WHERE  a.idarticle=$idarticle AND u.idusers = $iduser 
+    GROUP BY a.idarticle
+;";
+    $recup = mysqli_query($db,$sql);
+
+    if(mysqli_num_rows($recup)){
+        return mysqli_fetch_assoc($recup);
+    }else{
+        return false;
+    }
+}
