@@ -143,13 +143,30 @@ function recupArticleRedac(mysqli $db, int $idusers){
  *
  */
 
+
+
 function createArticleRedac(mysqli $db, int $id, string $thetitle, string $text, string $date, array $rubrique){
     $id = (int) $id;
     $thetitle = htmlspecialchars(strip_tags(trim($thetitle)),ENT_QUOTES);
     $text = htmlspecialchars(strip_tags(trim($text)),ENT_QUOTES);
     $date = date("Y-m-d H:i:s",time());
     $sql = "INSERT INTO article (thetitle,thetext,thedate,users_idusers) VALUES ('$thetitle','$text','$date',$id)";
-
+    // insertion de l'article dans la DB
     $insert = mysqli_query($db,$sql) or die(mysqli_error($db));
+
+    // si on a coché des rubriques
+    if(!empty($rubrique)){
+        // on récupère l'id de la dernière insertion (de l'article) avec mysqli_insert_id
+        $idarticle = mysqli_insert_id($db);
+
+        // tant qu'on a des articles
+
+        // exercice faire en sorte qu'il n'y ai qu'une requête pour remplir la table article_has_rubrique
+        foreach ($rubrique AS $categ){
+            $categ = (int) $categ;
+            $sql = "INSERT INTO article_has_rubrique (article_idarticle,rubrique_idrubrique) VALUES ($idarticle,$categ)";
+            mysqli_query($db,$sql);
+        }
+    }
 
 }
