@@ -34,6 +34,11 @@ if(isset($_GET['disconnect'])){
 
         $insert = createArticleRedac($mysqli,$idusers,$thetitle,$thetext,$thedate,$rub);
 
+        // insertion ok
+        if($insert){
+            header("Location: ./");
+        }
+
     }
 
     require_once "../view/redacCreateView.php";

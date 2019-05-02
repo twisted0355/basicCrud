@@ -138,9 +138,14 @@ function recupArticleRedac(mysqli $db, int $idusers){
 /*
  * creation d'un article
  *
- * ICI ICI ICI
- *
- *
+ * @name createArticleRedac
+ * @param mysqli
+ * @param int -> idusers
+ * @param string -> thetitle
+ * @param string -> thetext
+ * @param string
+ * @param array -> idrubrique
+ * @return true|false
  */
 
 
@@ -152,21 +157,30 @@ function createArticleRedac(mysqli $db, int $id, string $thetitle, string $text,
     $date = date("Y-m-d H:i:s",time());
     $sql = "INSERT INTO article (thetitle,thetext,thedate,users_idusers) VALUES ('$thetitle','$text','$date',$id)";
     // insertion de l'article dans la DB
-    $insert = mysqli_query($db,$sql) or die(mysqli_error($db));
+    $insert = mysqli_query($db,$sql)or die(false);
 
     // si on a coché des rubriques
     if(!empty($rubrique)){
         // on récupère l'id de la dernière insertion (de l'article) avec mysqli_insert_id
         $idarticle = mysqli_insert_id($db);
 
-        // tant qu'on a des articles
 
-        // exercice faire en sorte qu'il n'y ai qu'une requête pour remplir la table article_has_rubrique
+        // préparation de la requête avant la boucle
+        $sql = "INSERT INTO article_has_rubrique (article_idarticle,rubrique_idrubrique) VALUES ";
+
+        // tant qu'on a des articles
         foreach ($rubrique AS $categ){
             $categ = (int) $categ;
-            $sql = "INSERT INTO article_has_rubrique (article_idarticle,rubrique_idrubrique) VALUES ($idarticle,$categ)";
-            mysqli_query($db,$sql);
-        }
-    }
+            // concaténation de la requête dans la boucle
+            $sql .= " ($idarticle,$categ),";
 
+        }
+
+        // on retire la dernière virgule pour avoir une requête sql valide
+        $sql = substr($sql,0,-1);
+
+        // insertion des rubriques dans article_has_rubrique avec un seul INSERT
+        mysqli_query($db,$sql)or die(false);
+    }
+    return true;
 }

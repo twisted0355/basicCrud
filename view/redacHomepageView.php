@@ -76,7 +76,7 @@
                             ?></small></h4>
                     <p><?php
                         $position_last_space = strrpos($itemArticle['thetext'],' ');
-                        echo substr($itemArticle['thetext'],0,$position_last_space);
+                        echo substr(html_entity_decode($itemArticle['thetext']),0,$position_last_space);
                         ?> ... </p>
                     <p><?= $itemArticle['thedate'] ?></p>
                 </div>
