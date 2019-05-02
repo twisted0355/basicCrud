@@ -108,7 +108,7 @@ SELECT a.idarticle, a.thetitle,LEFT(a.thetext,300) AS thetext, a.thedate,
 						ON has.rubrique_idrubrique = rub.idrubrique
 					INNER JOIN article art 
 						ON art.idarticle = has.article_idarticle
-					WHERE has.rubrique_idrubrique=5
+					WHERE has.rubrique_idrubrique=3
                     ORDER BY rub.theintitule ASC)
         AND h.rubrique_idrubrique IN 
 			(SELECT ha.rubrique_idrubrique FROM article_has_rubrique ha WHERE ha.article_idarticle IN 
@@ -117,7 +117,7 @@ SELECT a.idarticle, a.thetitle,LEFT(a.thetext,300) AS thetext, a.thedate,
 						ON has.rubrique_idrubrique = rub.idrubrique
 					INNER JOIN article art 
 						ON art.idarticle = has.article_idarticle
-					WHERE has.rubrique_idrubrique=5
+					WHERE has.rubrique_idrubrique=3
                     ORDER BY rub.theintitule ASC
 				)
             )
@@ -144,8 +144,17 @@ SELECT a.idarticle, a.thetitle,LEFT(a.thetext,300) AS thetext, a.thedate,
 						ON has.rubrique_idrubrique = rub.idrubrique
 					INNER JOIN article art 
 						ON art.idarticle = has.article_idarticle
-					WHERE has.rubrique_idrubrique=5
+					WHERE has.rubrique_idrubrique=3
                     ORDER BY rub.theintitule ASC)
     GROUP BY a.idarticle
     ORDER BY a.thedate DESC
 ;
+
+# pour se connecter
+
+SELECT users.idusers, users.thename, users.themail,
+	perm.thename AS permname, perm.theperm
+	FROM users
+    INNER JOIN perm
+		ON perm.idperm = users.perm_idperm
+    WHERE users.thelogin='Admin' AND users.thepwd='C1C224B03CD9BC7B6A86D77F5DACE40191766C485CD55DC48CAF9AC873335D6F';
