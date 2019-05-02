@@ -24,7 +24,6 @@
     <div class="row">
         <div class="col-lg-12 text-center">
             <h1 class="mt-5">basicCrud Homepage</h1>
-            <p class="lead">Liste des articles de notre site</p>
         </div>
     </div>
 <!-- Articles -->
